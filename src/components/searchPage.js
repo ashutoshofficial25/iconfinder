@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import logo from "../assets/icon-logo.png";
+import IconCard from "./iconCard";
 
 const options = {
   method: "GET",
@@ -12,15 +13,17 @@ const options = {
 };
 
 const SearchPage = () => {
-  const { iconNames } = useParams();
+  const { iconName } = useParams();
   const [iconResult, setIconResult] = useState();
   const [styles, setStyles] = useState();
   const [priceFilter, setPriceFilter] = useState("All");
   const [styleFilter, setStylFilter] = useState("All");
 
+  console.log("log:", iconName);
+
   useEffect(() => {
     fetch(
-      `http://cors-anywhere.herokuapp.com/https://api.iconfinder.com/v4/icons/search?query=${iconNames}`,
+      `http://cors-anywhere.herokuapp.com/https://api.iconfinder.com/v4/icons/search?query=${iconName}`,
       options
     )
       .then((response) => response.json())
@@ -46,16 +49,135 @@ const SearchPage = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  console.log("log:", iconResult);
+
   return (
     <div>
-      {iconResult ? (
-        <div></div>
-      ) : (
-        <div>
+      <nav className="navbar px-3 navbar-expand-lg align-items-center navbar-light bg-success">
+        <Link className="" to="/">
           {" "}
-          <h1 className="text-dark"> Loading</h1>
+          <img
+            src={logo}
+            alt="img"
+            height="28"
+            style={{ marginRight: "10px" }}
+          />
+        </Link>
+        <div className="collapse navbar-collapse" id="navbarNavDropdowm">
+          <form className="form-inline  col-lg-5 d-flex">
+            <input
+              type="search"
+              className="form-control mr-sm-2 lg"
+              value={iconName}
+              placeholder="Search"
+              aria-level="search"
+            />
+            <button className="btn">
+              <i className="bi bi-search"></i>
+            </button>
+          </form>
         </div>
-      )}
+      </nav>
+
+      <div class="container-fluid">
+        <div class="row flex-nowrap">
+          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+              <p>Filters</p>
+              <div className="priceFilter"></div>
+              <label>
+                <input
+                  type="radio"
+                  name=""
+                  id=""
+                  value="free"
+                  checked={priceFilter == "free" ? true : false}
+                  onChange={(e) => setPriceFilter(e.target.value)}
+                />
+                Free
+              </label>
+
+              <hr />
+
+              <label>
+                <input
+                  type="radio"
+                  name=""
+                  id=""
+                  value="premium"
+                  checked={priceFilter == "premium" ? true : false}
+                  onChange={(e) => setPriceFilter(e.target.value)}
+                />
+                Premium
+              </label>
+
+              <hr />
+
+              <label>
+                <input
+                  type="radio"
+                  name=""
+                  id=""
+                  value="All"
+                  checked={priceFilter == "All" ? true : false}
+                  onChange={(e) => setPriceFilter(e.target.value)}
+                />
+                All
+              </label>
+
+              {styles
+                ? styles.map((style, index) => (
+                    <label key={index}>
+                      <input
+                        type="radio"
+                        name=""
+                        id=""
+                        value={style.identifier}
+                        checked={styleFilter == style.identifier ? true : false}
+                        onChange={(e) => setStylFilter(e.target.value)}
+                      />
+                      {style.name}
+                    </label>
+                  ))
+                : null}
+
+              <hr />
+            </div>
+          </div>
+          <div class="col py-3">
+            {iconResult ? (
+              <div className="content" id="content">
+                <h2 className="pb-3">You searched for '{iconName}'</h2>
+
+                <div className="showIcons row">
+                  {iconResult.icons.map((icon, index) => {
+                    if (priceFilter == "All" && styleFilter == "All") {
+                      return (
+                        <IconCard
+                          key={index}
+                          url={icon?.raster_sizes[4]?.formats[0].preview_url}
+                          tags={icon.tags}
+                          raster={icon.raster_sizes}
+                          premium={icon.is_premium}
+                        />
+                      );
+                    }
+                  })}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h1 className="text-dark">
+                  Loading. . .
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+                </h1>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

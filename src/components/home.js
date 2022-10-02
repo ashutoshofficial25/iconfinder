@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./header";
 import logo from "../assets/icon-logo.png";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const options = {
   method: "GET",
@@ -14,12 +14,13 @@ const options = {
 
 const Home = () => {
   const [searchIcon, setSearchIcon] = useState("");
-  const navigate = useHistory();
+  const navigate = useNavigate();
 
-  console.log(searchIcon);
+  // console.log(searchIcon);
 
   const searchClick = () => {
-    navigate(`searchPage${searchIcon}`);
+    console.log(`/searchPage/${searchIcon}`);
+    navigate(`/searchPage/${searchIcon}`);
   };
   return (
     <div>
