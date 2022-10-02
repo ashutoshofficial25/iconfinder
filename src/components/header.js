@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const options = {
   method: "GET",
+  data: `${process.env.REACT_APP_CLIENT_ID}`,
   headers: {
     Accept: "application/json",
     Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
@@ -13,7 +14,10 @@ const Header = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://api.iconfinder.com/v4/categories?count=15", options)
+    fetch(
+      "https://iconfinder-api-auth.herokuapp.com/v4/categories?count=15",
+      options
+    )
       .then((response) => response.json())
       .then((response) => {
         return response;
@@ -23,7 +27,10 @@ const Header = () => {
       })
       .catch((error) => console.log(error));
 
-    fetch("https://api.iconfinder.com/v4/styles?count=13", options)
+    fetch(
+      "https://iconfinder-api-auth.herokuapp.com/v4/styles?count=13",
+      options
+    )
       .then((response) => response.json())
       .then((response) => {
         return response;

@@ -26,7 +26,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     fetch(
-      `http://cors-anywhere.herokuapp.com/https://api.iconfinder.com/v4/icons/search?query=${iconName}`,
+      `https://iconfinder-api-auth.herokuapp.com/v4/icons/search?query=${iconName}`,
       options
     )
       .then((response) => response.json())
@@ -39,7 +39,7 @@ const SearchPage = () => {
       .catch((error) => console.log(error));
 
     fetch(
-      "http://cors-anywhere.herokuapp.com/https://api.iconfinder.com/v4/styles?count=13",
+      "https://iconfinder-api-auth.herokuapp.com/v4/styles?count=13",
       options
     )
       .then((response) => response.json())
