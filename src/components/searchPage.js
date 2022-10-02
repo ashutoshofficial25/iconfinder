@@ -7,8 +7,7 @@ const options = {
   method: "GET",
   headers: {
     Accept: "application/json",
-    Authorization:
-      "Bearer 77BkpdDPBbGO1Yuy5or0T8tpAZ4m566kzygVhaBxsdZLl4AVnaakuo0ogXRnJR07",
+    Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
   },
 };
 
@@ -48,7 +47,7 @@ const SearchPage = () => {
         return response;
       })
       .then(function (response) {
-        setStyles(response.styles);
+        setStyles(response?.styles);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -84,10 +83,10 @@ const SearchPage = () => {
         </div>
       </nav>
 
-      <div class="container-fluid">
-        <div class="row flex-nowrap">
-          <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+      <div className="container-fluid">
+        <div className="row flex-nowrap">
+          <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
               <p>Filters</p>
               <div className="priceFilter"></div>
               <label>
@@ -149,7 +148,7 @@ const SearchPage = () => {
               <hr />
             </div>
           </div>
-          <div class="col py-3">
+          <div className="col py-3">
             {iconResult ? (
               <div className="content" id="content">
                 <h2 className="pb-3">You searched for '{iconName}'</h2>
@@ -174,8 +173,8 @@ const SearchPage = () => {
               <div>
                 <h1 className="text-dark">
                   Loading. . .
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only"></span>
+                  <div className="spinner-border" role="status">
+                    <span className="sr-only"></span>
                   </div>
                 </h1>
               </div>
