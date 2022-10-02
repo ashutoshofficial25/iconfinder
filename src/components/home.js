@@ -55,7 +55,7 @@ const Home = () => {
           <p className="text-secondary">
             Popular searches : Instagram, facebook, Arrow, Phone
           </p>
-          <h5> Search through 5,749,072 Icons and illustrations</h5>
+          <h5> Search through 6,825,000+ Icons and illustrations</h5>
         </div>
       </div>
     </div>
