@@ -14,10 +14,7 @@ const Header = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "http://cors-anywhere.herokuapp.com/https://api.iconfinder.com/v4/categories?count=15",
-      options
-    )
+    fetch("https://api.iconfinder.com/v4/categories?count=15", options)
       .then((response) => response.json())
       .then((response) => {
         return response;
@@ -27,10 +24,7 @@ const Header = () => {
       })
       .catch((error) => console.log(error));
 
-    fetch(
-      "http://cors-anywhere.herokuapp.com/https://api.iconfinder.com/v4/styles?count=13",
-      options
-    )
+    fetch("https://api.iconfinder.com/v4/styles?count=13", options)
       .then((response) => response.json())
       .then((response) => {
         return response;
