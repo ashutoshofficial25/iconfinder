@@ -4,13 +4,15 @@ import ReactModal from "react-modal";
 function IconCard(props) {
   const customStyles = {
     content: {
-      top: "50%",
+      top: "40%",
       left: "45%",
       right: "auto",
       bottom: "auto",
-      paddingLeft: "150px",
-      paddingRight: "150px",
-      transform: "translate(-50,-50)",
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      paddingLeft: "100px",
+      paddingRight: "100px",
       background: "#252424",
       color: "#fff",
     },

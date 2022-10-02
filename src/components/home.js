@@ -26,10 +26,16 @@ const Home = () => {
     <div>
       <Header />
 
-      <div className="vh-100 d-flex flex-column justify-content-center align-items-center text-center">
-        <img src={logo} alt="logo-img" />
+      <div className="vh-100 navbar-fixed-top d-flex flex-column justify-content-center align-items-center text-center">
+        <img src={logo} alt="logo-img" className="p-4" />
 
-        <div className="input-group input-group-lg px-5 w-50 bg-light">
+        <form
+          style={{
+            boxShadow: "0 5px 15px 0px rgba(0, 0, 0, 0.4 )",
+            borderRadius: "10px",
+          }}
+          className="input-group input-group-lg  w-50 bg-light"
+        >
           <input
             className="form-control px-5 bg-light"
             placeholder="Search for icons"
@@ -43,7 +49,7 @@ const Home = () => {
             {" "}
             <i className="bi bi-search"></i>
           </button>
-        </div>
+        </form>
 
         <div className="m-3">
           <p className="text-secondary">

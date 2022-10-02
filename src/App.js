@@ -3,6 +3,7 @@ import Home from "./components/home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SearchPage from "./components/searchPage";
 function App() {
