@@ -4,8 +4,7 @@ const options = {
   method: "GET",
   headers: {
     Accept: "application/json",
-    Authorization:
-      "Bearer 77BkpdDPBbGO1Yuy5or0T8tpAZ4m566kzygVhaBxsdZLl4AVnaakuo0ogXRnJR07",
+    Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
   },
 };
 
