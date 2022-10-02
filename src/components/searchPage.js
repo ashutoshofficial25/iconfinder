@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/icon-logo.png";
 import IconCard from "./iconCard";
 
@@ -14,12 +14,16 @@ const options = {
 
 const SearchPage = () => {
   const { iconName } = useParams();
+  const navigate = useNavigate();
+  const [search, setSearch] = useState(iconName);
   const [iconResult, setIconResult] = useState();
   const [styles, setStyles] = useState();
   const [priceFilter, setPriceFilter] = useState("All");
   const [styleFilter, setStylFilter] = useState("All");
 
-  console.log("log:", iconName);
+  const searchIcon = (e) => {
+    navigate(`/searchPage/${search}`);
+  };
 
   useEffect(() => {
     fetch(
@@ -68,11 +72,12 @@ const SearchPage = () => {
             <input
               type="search"
               className="form-control mr-sm-2 lg"
-              value={iconName}
+              value={search}
               placeholder="Search"
+              onChange={(e) => setSearch(e.target.value)}
               aria-level="search"
             />
-            <button className="btn">
+            <button className="btn" onClick={searchIcon}>
               <i className="bi bi-search"></i>
             </button>
           </form>
@@ -90,8 +95,8 @@ const SearchPage = () => {
                   type="radio"
                   name=""
                   id=""
-                  value="free"
-                  checked={priceFilter == "free" ? true : false}
+                  value="Free"
+                  checked={priceFilter == "Free" ? true : false}
                   onChange={(e) => setPriceFilter(e.target.value)}
                 />
                 Free
@@ -104,8 +109,8 @@ const SearchPage = () => {
                   type="radio"
                   name=""
                   id=""
-                  value="premium"
-                  checked={priceFilter == "premium" ? true : false}
+                  value="Premium"
+                  checked={priceFilter == "Premium" ? true : false}
                   onChange={(e) => setPriceFilter(e.target.value)}
                 />
                 Premium

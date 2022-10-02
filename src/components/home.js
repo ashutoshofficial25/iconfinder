@@ -19,7 +19,6 @@ const Home = () => {
   // console.log(searchIcon);
 
   const searchClick = () => {
-    console.log(`/searchPage/${searchIcon}`);
     navigate(`/searchPage/${searchIcon}`);
   };
   return (
