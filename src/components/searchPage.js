@@ -17,7 +17,7 @@ const SearchPage = () => {
   const [search, setSearch] = useState(iconName);
   const [iconResult, setIconResult] = useState();
   const [styles, setStyles] = useState();
-  const [priceFilter, setPriceFilter] = useState("free");
+  const [priceFilter, setPriceFilter] = useState("all");
   const [styleFilter, setStylFilter] = useState("");
 
   const searchIcon = (e) => {
@@ -58,7 +58,7 @@ const SearchPage = () => {
 
   return (
     <div>
-      <nav className="navbar px-3 navbar-expand-lg align-items-center navbar-light bg-success">
+      <nav className="navbar px-3 navbar-expand-lg align-items-center bg-success sticky-top">
         <Link className="" to="/">
           {" "}
           <img
@@ -85,64 +85,70 @@ const SearchPage = () => {
         </div>
       </nav>
 
-      <div className="container-fluid">
+      <div className="container-fluid ">
         <div className="row flex-nowrap">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-              <p>Filters</p>
-              <div className="priceFilter"></div>
-              <label>
-                <input
-                  type="radio"
-                  name=""
-                  id=""
-                  value="free"
-                  checked={priceFilter == "free" ? true : false}
-                  onChange={(e) => setPriceFilter(e.target.value)}
-                />
-                Free
-              </label>
+            <div
+              id="sidebar-nav"
+              className="list-group text-sm-start text-white min-vh-100"
+            >
+              <h4 className="text-muted">Filters</h4>
+              <div className="priceFilter" style={{ marginLeft: "12px" }}>
+                <label>
+                  <input
+                    type="radio"
+                    name=""
+                    id=""
+                    value="free"
+                    checked={priceFilter == "free" ? true : false}
+                    onChange={(e) => setPriceFilter(e.target.value)}
+                  />
+                  &nbsp; Free
+                </label>
 
+                <hr />
+
+                <label>
+                  <input
+                    type="radio"
+                    name=""
+                    id=""
+                    value="premium"
+                    checked={priceFilter == "premium" ? true : false}
+                    onChange={(e) => setPriceFilter(e.target.value)}
+                  />
+                  &nbsp; Premium
+                </label>
+
+                <hr />
+
+                <label>
+                  <input
+                    type="radio"
+                    name=""
+                    id=""
+                    value="all"
+                    checked={priceFilter == "all" ? true : false}
+                    onChange={(e) => setPriceFilter(e.target.value)}
+                  />
+                  &nbsp; All
+                </label>
+              </div>
               <hr />
-
-              <label>
-                <input
-                  type="radio"
-                  name=""
-                  id=""
-                  value="premium"
-                  checked={priceFilter == "premium" ? true : false}
-                  onChange={(e) => setPriceFilter(e.target.value)}
-                />
-                Premium
-              </label>
-
-              <hr />
-
-              <label>
-                <input
-                  type="radio"
-                  name=""
-                  id=""
-                  value="all"
-                  checked={priceFilter == "all" ? true : false}
-                  onChange={(e) => setPriceFilter(e.target.value)}
-                />
-                All
-              </label>
-
+              <p className="text-muted"> Styles</p>
               {styles
                 ? styles.map((style, index) => (
-                    <label key={index}>
+                    <label key={index} style={{ marginLeft: "12px" }}>
                       <input
                         type="radio"
-                        name=""
-                        id=""
+                        name="style"
+                        className="mb-1"
+                        id="identifier  "
                         value={style.identifier}
                         checked={styleFilter == style.identifier ? true : false}
                         onChange={(e) => setStylFilter(e.target.value)}
                       />
-                      {style.name}
+                      &nbsp; {style.name}
                     </label>
                   ))
                 : null}
