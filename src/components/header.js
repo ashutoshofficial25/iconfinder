@@ -108,6 +108,7 @@ const Header = () => {
               </li>
             </ul>
           </div>
+          <div className="btn btn-outline-secondary">Login/Singup</div>
         </div>
       </nav>
       _

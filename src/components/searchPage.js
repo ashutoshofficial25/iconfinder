@@ -83,6 +83,7 @@ const SearchPage = () => {
             </button>
           </form>
         </div>
+        <div className="btn btn-outline-dark">Login/Signup</div>
       </nav>
 
       <div className="container-fluid ">
@@ -159,7 +160,9 @@ const SearchPage = () => {
           <div className="col py-3">
             {iconResult ? (
               <div className="content" id="content">
-                <h2 className="pb-3">You searched for '{iconName}'</h2>
+                <h3 className="pb-3 text-muted  ">
+                  You searched for '{iconName}'- {styleFilter}
+                </h3>
 
                 <div className="showIcons row">
                   {iconResult.icons.map((icon, index) => {
