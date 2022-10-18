@@ -17,8 +17,8 @@ const SearchPage = () => {
   const [search, setSearch] = useState(iconName);
   const [iconResult, setIconResult] = useState();
   const [styles, setStyles] = useState();
-  const [priceFilter, setPriceFilter] = useState("All");
-  const [styleFilter, setStylFilter] = useState("All");
+  const [priceFilter, setPriceFilter] = useState("free");
+  const [styleFilter, setStylFilter] = useState("");
 
   const searchIcon = (e) => {
     navigate(`/searchPage/${search}`);
@@ -26,7 +26,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     fetch(
-      `https://iconfinder-api-auth.herokuapp.com/v4/icons/search?query=${iconName}`,
+      `https://iconfinder-api-auth.herokuapp.com/v4/icons/search?query=${iconName}&premium=${priceFilter}&styles=${styleFilter}`,
       options
     )
       .then((response) => response.json())
@@ -37,7 +37,9 @@ const SearchPage = () => {
         setIconResult(response);
       })
       .catch((error) => console.log(error));
+  }, [priceFilter, styleFilter]);
 
+  useEffect(() => {
     fetch(
       "https://iconfinder-api-auth.herokuapp.com/v4/styles?count=13",
       options
@@ -52,7 +54,7 @@ const SearchPage = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log("log:", iconResult);
+  console.log("log: pricefilter", priceFilter);
 
   return (
     <div>
@@ -94,8 +96,8 @@ const SearchPage = () => {
                   type="radio"
                   name=""
                   id=""
-                  value="Free"
-                  checked={priceFilter == "Free" ? true : false}
+                  value="free"
+                  checked={priceFilter == "free" ? true : false}
                   onChange={(e) => setPriceFilter(e.target.value)}
                 />
                 Free
@@ -108,8 +110,8 @@ const SearchPage = () => {
                   type="radio"
                   name=""
                   id=""
-                  value="Premium"
-                  checked={priceFilter == "Premium" ? true : false}
+                  value="premium"
+                  checked={priceFilter == "premium" ? true : false}
                   onChange={(e) => setPriceFilter(e.target.value)}
                 />
                 Premium
@@ -122,8 +124,8 @@ const SearchPage = () => {
                   type="radio"
                   name=""
                   id=""
-                  value="All"
-                  checked={priceFilter == "All" ? true : false}
+                  value="all"
+                  checked={priceFilter == "all" ? true : false}
                   onChange={(e) => setPriceFilter(e.target.value)}
                 />
                 All
@@ -155,17 +157,15 @@ const SearchPage = () => {
 
                 <div className="showIcons row">
                   {iconResult.icons.map((icon, index) => {
-                    if (priceFilter == "All" && styleFilter == "All") {
-                      return (
-                        <IconCard
-                          key={index}
-                          url={icon?.raster_sizes[4]?.formats[0].preview_url}
-                          tags={icon.tags}
-                          raster={icon.raster_sizes}
-                          premium={icon.is_premium}
-                        />
-                      );
-                    }
+                    return (
+                      <IconCard
+                        key={index}
+                        url={icon?.raster_sizes[4]?.formats[0].preview_url}
+                        tags={icon.tags}
+                        raster={icon.raster_sizes}
+                        premium={icon.is_premium}
+                      />
+                    );
                   })}
                 </div>
               </div>
